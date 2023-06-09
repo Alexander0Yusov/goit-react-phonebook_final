@@ -1,0 +1,147 @@
+.listItem {
+  position: relative;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+
+  color: #b0b1b4;
+
+  background: linear-gradient(#3a3b3d, 89%, #b0b1b4);
+  /* background-color: #3a3b3d; */
+  /* outline: 1px solid tomato; */
+  border-radius: 8px;
+  text-align: left;
+
+  &:hover {
+    background: linear-gradient(#3a3b3d, 82%, #b0b1b4);
+    outline: 1px solid #2574db;
+    cursor: pointer;
+  }
+}
+
+.imageThumb {
+  display: flex;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 16px;
+  overflow: hidden;
+  background-color: #b0b1b4;
+  cursor: pointer;
+
+  &:hover .favoriteBorderIcon {
+    color: #2574db;
+  }
+
+  &:hover .favoriteIcon {
+    color: #2574db;
+  }
+}
+
+.favoriteBorderIcon {
+  position: absolute;
+  top: 1px;
+  left: 44px;
+  /* left: 2px; */
+
+  width: 18px;
+  color: #5db4fa;
+}
+
+.favoriteIcon {
+  position: absolute;
+  top: 1px;
+  left: 44px;
+  /* left: 2px; */
+
+  width: 18px;
+  color: #5db4fa;
+}
+
+.dataBox {
+  margin-right: auto;
+}
+
+.pName {
+  margin: 0 0;
+  margin-bottom: 2px;
+  font-size: 18px;
+  font-weight: 600;
+  color: azure;
+}
+
+.pNumber {
+  margin: 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #b0b1b4;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  margin-left: 8px;
+  vertical-align: baseline;
+  padding: 0;
+  /* padding-top: 2px; */
+  /* border-radius: 50%; */
+  cursor: pointer;
+  /* background-color: #5db4fa; */
+  color: #c8c8c8;
+  background-color: transparent;
+  /* outline: 1px solid tomato; */
+  border: none;
+
+  &:hover {
+    outline: 1px solid #b0b1b4;
+  }
+
+  & .starIcon {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover .starIcon {
+    color: rgb(243, 245, 78);
+  }
+
+  & .callIcon {
+    display: block;
+    /* width: 28px;
+    height: 28px; */
+
+    width: 21px;
+    height: 21px;
+    color: rgb(114, 225, 114);
+  }
+
+  &:hover .callIcon {
+    color: rgb(0, 255, 0);
+  }
+
+  & .removeIcon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: rgb(215, 81, 81);
+  }
+
+  &:hover .removeIcon {
+    color: red;
+  }
+}
+
+.photoDemo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
