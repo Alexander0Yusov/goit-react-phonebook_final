@@ -1,6 +1,9 @@
 .container {
   width: 340px;
-  height: 99vh;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  /* height: 99vh; */
   /* overflow-y: auto; */
 
   text-align: center;

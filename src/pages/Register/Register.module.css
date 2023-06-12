@@ -1,0 +1,14 @@
+.register {
+  outline: 1px solid tomato;
+  padding-top: 44px;
+
+  height: calc(100vh - 50px - 44px);
+}
+
+.title {
+  color: azure;
+  font-size: 20px;
+  font-weight: normal;
+
+  margin: 0;
+}

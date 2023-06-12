@@ -1,0 +1,12 @@
+.contacts {
+  outline: 1px solid tomato;
+
+  height: calc(100vh - 50px);
+}
+
+.title {
+  color: azure;
+  font-size: 36px;
+
+  margin: 12px 0;
+}

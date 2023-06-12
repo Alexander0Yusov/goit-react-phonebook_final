@@ -1,0 +1,98 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 50px;
+  outline: 1px solid tomato;
+}
+
+.logo {
+  display: none;
+}
+
+.navbar {
+  display: flex;
+  gap: 2px;
+  justify-content: space-around;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+}
+
+.li {
+  position: relative;
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  height: 44px;
+  width: 64px;
+  font-size: 32px;
+  border-radius: 4px;
+
+  .iconHome {
+    display: block;
+    /* font-size: 32px; */
+  }
+
+  .iconList {
+    display: block;
+    font-size: 24px;
+  }
+
+  .iconAddUser {
+    display: block;
+    /* font-size: 24px; */
+  }
+
+  .iconLogin {
+    display: block;
+    font-size: 28px;
+  }
+
+  .iconLogout {
+    display: block;
+    font-size: 26px;
+  }
+
+  &:hover {
+    background-color: #3a3b3d;
+  }
+
+  &.isActive {
+    &:hover {
+      background-color: transparent;
+    }
+
+    .link {
+      color: #2574db;
+    }
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      content: '';
+      display: block;
+      width: 100%;
+      height: 4px;
+      background-color: #2574db;
+      border-radius: 2px;
+    }
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #b0b1b4;
+
+  & svg {
+    margin: 0 auto;
+  }
+}

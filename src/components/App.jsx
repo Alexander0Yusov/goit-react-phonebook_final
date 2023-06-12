@@ -1,40 +1,21 @@
-import { useState } from 'react';
-
-import Section from './Section/Section';
-import Form from './Form/Form';
-import Contacts from './Contacts/Contacts';
-import Filter from './Filter/Filter';
-import Modal from './Modal/Modal';
-
 import css from './App.module.css';
+import { Routes, Route } from 'react-router-dom';
+import SharedLayout from 'pages/SharedLayout/SharedLayout';
+import Home from 'pages/Home/Home';
+import Contacts from 'pages/Contacts/Contacts';
+import Login from 'pages/Login/Login';
+import Register from 'pages/Register/Register';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getUserThunk } from 'redux/authService/thunks';
 
 export const App = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [userIdModal, setUserIdModal] = useState('');
-  const [userNameModal, setUserNameModal] = useState('');
-  const [userNumberModal, setUserNumberModal] = useState('');
-  const [userUrlModal, setUserUrlModal] = useState('');
-  const [actionModal, setActionModal] = useState('Add');
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.authCombine.user);
 
-  const fillForm = (id, name, number, url) => {
-    setUserIdModal(id);
-    setUserNameModal(name);
-    setUserNumberModal(number);
-    setUserUrlModal(url);
-    setActionModal('Edit');
-  };
-
-  const resetForm = () => {
-    setUserNameModal('');
-    setUserNumberModal('');
-    setUserUrlModal('');
-    setActionModal('Add');
-  };
-
-  const toggleModal = () => {
-    setShowModal(prev => !prev);
-    resetForm();
-  };
+  useEffect(() => {
+    dispatch(getUserThunk());
+  }, [dispatch]);
 
   return (
     <div
@@ -50,23 +31,15 @@ export const App = () => {
         // overflow: 'auto',
       }}
     >
-      <Section>
-        <h2 className={css.title}>Phonebook</h2>
-        <Filter onModalOpen={toggleModal} />
-        <Contacts toggleModal={toggleModal} fillForm={fillForm} />
-      </Section>
-      {showModal && (
-        <Modal onClose={toggleModal}>
-          <Form
-            toggleModal={toggleModal}
-            id={userIdModal}
-            nameIni={userNameModal}
-            numberIni={userNumberModal}
-            urlIni={userUrlModal}
-            actionModal={actionModal}
-          ></Form>
-        </Modal>
-      )}
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          {isLoggedIn && <Route path="/contacts" element={<Contacts />} />}
+          <Route path="*" element={<h4>Page not found</h4>} />
+        </Route>
+      </Routes>
     </div>
   );
 };
