@@ -1,9 +1,9 @@
-import { axiosInstance, pushToken, pullToken } from 'redux/axiosHerokuInstance';
+import { pushToken, pullToken } from 'redux/axiosHerokuInstance';
 import axios from 'axios';
 
 export const signUp = async user => {
   const { data } = await axios.post(
-    'https:connections-api.herokuapp.com/users/signup',
+    'https://connections-api.herokuapp.com/users/signup',
     user
   );
   pushToken(data.token);
@@ -12,7 +12,7 @@ export const signUp = async user => {
 
 export const login = async user => {
   const { data } = await axios.post(
-    'https:connections-api.herokuapp.com/users/login',
+    'https://connections-api.herokuapp.com/users/login',
     user
   );
   pushToken(data.token);
@@ -20,12 +20,12 @@ export const login = async user => {
 };
 
 export const logout = async () => {
-  const { data } = await axiosInstance.post('/users/logout');
+  const { data } = await axios.post('/users/logout');
   pullToken();
   return data;
 };
 
 export const getUser = async () => {
-  const { data } = await axiosInstance.get('/users/current');
+  const { data } = await axios.get('/users/current');
   return data;
 };
