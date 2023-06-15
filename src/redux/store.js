@@ -8,7 +8,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const authPersistConfig = {
-  key: 'phonebook_auth',
+  key: 'phonebook_auth_final',
   storage,
   whitelist: ['token'],
 };
