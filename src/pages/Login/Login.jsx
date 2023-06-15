@@ -11,7 +11,7 @@ const Login = () => {
   const { token } = useSelector(authSelector);
 
   useEffect(() => {
-    token && navigate('/');
+    // token && navigate('/');
   }, [token, navigate]);
 
   return (
