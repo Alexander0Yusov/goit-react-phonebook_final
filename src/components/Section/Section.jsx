@@ -1,4 +1,4 @@
-import css from './Section.module.css';
+import css from './Section.module.scss';
 import PropTypes from 'prop-types';
 
 const Section = ({ children }) => {

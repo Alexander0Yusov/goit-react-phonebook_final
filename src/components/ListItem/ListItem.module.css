@@ -19,6 +19,15 @@
     outline: 1px solid #2574db;
     cursor: pointer;
   }
+
+  @media screen and (min-width: 768px) {
+    width: 355px;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 375px;
+  }
 }
 
 .imageThumb {

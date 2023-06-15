@@ -45,7 +45,7 @@ export const getUserThunk = createAsyncThunk(
         return;
       }
 
-      token && pushToken(token);
+      pushToken(token);
 
       console.log('token ', token);
 

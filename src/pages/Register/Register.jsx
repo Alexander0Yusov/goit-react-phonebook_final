@@ -3,15 +3,16 @@ import AuthForm from 'components/AuthForm/AuthForm';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { authSelector } from 'redux/stateSelectors';
 
 const Register = () => {
   const navigate = useNavigate();
 
-  const isAuth = useSelector(state => state.authCombine.token);
+  const { token } = useSelector(authSelector);
 
   useEffect(() => {
-    isAuth && navigate('/');
-  }, [isAuth, navigate]);
+    token && navigate('/');
+  }, [token, navigate]);
 
   return (
     <div className={css.register}>

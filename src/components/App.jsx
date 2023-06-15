@@ -1,17 +1,19 @@
 import css from './App.module.css';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, lazy } from 'react';
+import { getUserThunk } from 'redux/authService/thunks';
+
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
 import Home from 'pages/Home/Home';
-import Contacts from 'pages/Contacts/Contacts';
-import Login from 'pages/Login/Login';
-import Register from 'pages/Register/Register';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getUserThunk } from 'redux/authService/thunks';
+import { authSelector } from 'redux/stateSelectors';
+const Register = lazy(() => import('../pages/Register/Register'));
+const Login = lazy(() => import('../pages/Login/Login'));
+const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.authCombine.user);
+  const isLoggedIn = useSelector(authSelector);
 
   useEffect(() => {
     dispatch(getUserThunk());
@@ -59,6 +61,7 @@ export const App = () => {
 // темизация(цветность) emotion 'dark/light'
 // кастомный хук по типу hook useLocalStorage video_1 1:06
 // при загрузке можно кнопки disable=true
-// стилизация прокрутки
+// реакт квери на мокапи
+// заюзать Chakra UI або Material UI - по дизайну.
 
-// ошибка в юзэффекте не дает норм деплой
+// список перевести на хероку - новые санки по контактам. !!

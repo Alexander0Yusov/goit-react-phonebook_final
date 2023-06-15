@@ -1,0 +1,25 @@
+.container {
+  // max-width: 340px;
+  width: 100%;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  /* height: 99vh; */
+  /* overflow-y: auto; */
+
+  text-align: center;
+  background-color: #242527;
+
+  @media screen and (min-width: 480px) {
+    width: 480px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 1200px;
+  }
+}

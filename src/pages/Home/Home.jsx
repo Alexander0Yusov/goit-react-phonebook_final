@@ -1,13 +1,15 @@
+import UserData from 'components/UserData/UserData';
 import css from './Home.module.scss';
 import { useSelector } from 'react-redux';
+import { authSelector } from 'redux/stateSelectors';
 
 const Home = () => {
-  const { user } = useSelector(state => state.authCombine);
+  const { user } = useSelector(authSelector);
 
   return (
     <div className={css.home}>
       <h2 className={css.title}>Phonebook</h2>
-      {user?.name && <p className={css.greeting}>Hi, {user.name}!</p>}
+      {user && <UserData />}
     </div>
   );
 };

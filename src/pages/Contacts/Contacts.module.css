@@ -1,5 +1,5 @@
 .contacts {
-  outline: 1px solid tomato;
+  /* outline: 1px solid tomato; */
 
   height: calc(100vh - 50px);
 }

@@ -55,7 +55,7 @@
 }
 
 .input:valid {
-  box-shadow: 0 0 7px 4px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 4px 2px rgba(221, 221, 221, 1);
 }
 
 .input::placeholder {
@@ -106,15 +106,15 @@
 
 .form:valid .button {
   color: azure;
-  box-shadow: 0 0 7px 4px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 4px 2px rgba(221, 221, 221, 1);
 }
 
 .form:valid .button:hover,
 .form:valid .button:focus {
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 5px 3px rgba(221, 221, 221, 1);
 }
 .form:valid .button:active {
-  box-shadow: 0 0 6px 2px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 4px 2px rgba(221, 221, 221, 1);
 }
 
 .photo {

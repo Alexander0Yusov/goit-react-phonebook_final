@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RotatingLines } from 'react-loader-spinner';
@@ -7,11 +8,9 @@ import {
 } from 'redux/contactsDB/thunks';
 import css from './ContactList.module.css';
 import ListItem from 'components/ListItem/ListItem';
+import { contactsSelector, filterSelector } from 'redux/stateSelectors';
 
-const contactsSelector = state => state.contactsDBCombine;
-const filterSelector = state => state.filterCombine;
-
-const Contacts = ({ toggleModal, fillForm }) => {
+const ContactList = ({ toggleModal }) => {
   const dispatch = useDispatch();
   const { contacts, error, isLoading } = useSelector(contactsSelector);
   const { filter } = useSelector(filterSelector);
@@ -43,7 +42,6 @@ const Contacts = ({ toggleModal, fillForm }) => {
             url={url}
             deleteContact={deleteHandler}
             toggleModal={toggleModal}
-            fillForm={fillForm}
           />
         ))}
       </ul>
@@ -65,4 +63,8 @@ const Contacts = ({ toggleModal, fillForm }) => {
   );
 };
 
-export default Contacts;
+export default ContactList;
+
+ContactList.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+};

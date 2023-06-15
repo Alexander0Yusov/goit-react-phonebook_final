@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
 import css from './AuthForm.module.css';
-// import { login } from 'redux/authService/operations';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk, signUpThunk } from 'redux/authService/thunks';
+import { setError } from 'redux/authService/authSlice';
+import { authSelector } from 'redux/stateSelectors';
+
+const AUTH_ACTION = {
+  SIGNUP: 'SignUp',
+  LOGIN: 'Login',
+};
 
 const AuthForm = () => {
   const [name, setName] = useState('');
@@ -11,19 +17,26 @@ const AuthForm = () => {
   const [password, setPassword] = useState('examplepwd12345');
   const [action, setAction] = useState('');
 
+  const { error } = useSelector(authSelector);
+
   const location = useLocation();
   const dispatch = useDispatch();
 
+  const { SIGNUP, LOGIN } = AUTH_ACTION;
+
   useEffect(() => {
-    location.pathname === '/register'
-      ? setAction('SignUp')
-      : setAction('Login');
-  }, [location.pathname]);
+    location.pathname === '/register' ? setAction(SIGNUP) : setAction(LOGIN);
+  }, [location.pathname, SIGNUP, LOGIN]);
+
+  useEffect(() => {
+    error && alert(error);
+    dispatch(setError(null));
+  }, [error, dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (action === 'SignUp') {
+    if (action === SIGNUP) {
       const user = {
         name,
         email,
@@ -32,7 +45,7 @@ const AuthForm = () => {
       dispatch(signUpThunk(user));
     }
 
-    if (action === 'Login') {
+    if (action === LOGIN) {
       const user = {
         email,
         password,
@@ -43,13 +56,13 @@ const AuthForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={css.authForm} autoComplete="off">
-      {action === 'SignUp' && (
+      {action === SIGNUP && (
         <label className={css.formLabel}>
           <input
             type="text"
             name="name"
-            title="title text"
-            // required
+            title="Enter Your Name, please!"
+            required
             value={name}
             onChange={e => {
               setName(e.target.value);
@@ -63,7 +76,7 @@ const AuthForm = () => {
         <input
           type="text"
           name="email"
-          title="title text"
+          title="Enter email, please!"
           required
           value={email}
           onChange={e => {
@@ -77,7 +90,7 @@ const AuthForm = () => {
         <input
           type="tel"
           name="password"
-          title="title text"
+          title="Enter password, please!"
           required
           value={password}
           onChange={e => {
@@ -88,7 +101,7 @@ const AuthForm = () => {
         />
       </label>
 
-      <button className={css.button} type="submit">
+      <button className={css.authButton} type="submit">
         {action}
       </button>
     </form>

@@ -8,7 +8,7 @@
   width: 310px;
   padding: 24px 0;
   margin: 0 auto;
-  border: 1px solid tomato;
+  border: 1px solid #b0b1b4;
   border-radius: 20px;
   /* background-color: #3a3b3d; */
   background-color: #242527;
@@ -37,7 +37,7 @@
 }
 
 .formLabel {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .input {
@@ -56,7 +56,7 @@
 }
 
 .input:valid {
-  box-shadow: 0 0 7px 4px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 4px 2px rgba(221, 221, 221, 1);
 }
 
 .input::placeholder {
@@ -93,7 +93,7 @@
   display: none;
 }
 
-.button {
+.authButton {
   width: 214px;
   height: 30px;
   font-size: 20px;
@@ -105,17 +105,17 @@
   cursor: pointer;
 }
 
-.form:valid .button {
+.authForm:valid .authButton {
   color: azure;
-  box-shadow: 0 0 7px 4px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 4px 2px rgba(221, 221, 221, 1);
 }
 
-.form:valid .button:hover,
-.form:valid .button:focus {
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+.authForm:valid .authButton:hover,
+.authForm:valid .authButton:focus {
+  box-shadow: 0 0 5px 3px rgba(221, 221, 221, 1);
 }
-.form:valid .button:active {
-  box-shadow: 0 0 6px 2px rgba(221, 221, 221, 1);
+.authForm:valid .authButton:active {
+  box-shadow: 0 0 4px 2px rgba(221, 221, 221, 1);
 }
 
 .photo {

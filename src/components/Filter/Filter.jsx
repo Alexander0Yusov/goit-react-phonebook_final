@@ -5,10 +5,11 @@ import { TiUserAdd } from 'react-icons/ti';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/filter/filterSlice';
+import { filterSelector } from 'redux/stateSelectors';
 
 const Filter = ({ onModalOpen }) => {
   const dispatch = useDispatch();
-  const { filter } = useSelector(state => state.filterCombine);
+  const { filter } = useSelector(filterSelector);
 
   const inputHandler = e => {
     dispatch(setFilter(e.target.value));

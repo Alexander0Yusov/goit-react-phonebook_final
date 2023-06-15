@@ -1,3 +1,5 @@
+// комбинацию тоже удобно оглашать в отльном файле
+
 // import { combineReducers } from '@reduxjs/toolkit';
 // import { filterReducer } from './filter/filterSlice';
 // import { contactsDBReducer } from './contactsDB/contactsDBSlice';

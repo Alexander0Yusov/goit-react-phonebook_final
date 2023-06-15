@@ -4,11 +4,29 @@
   overflow-y: auto;
   height: calc(100% - 56px);
 
-  outline: 1px solid green;
+  outline: 1px solid #3a3b3d;
+}
+
+.contactList::-webkit-scrollbar {
+  width: 12px; /* ширина для вертикального скролла */
+  height: 8px; /* высота для горизонтального скролла */
+  background-color: #3a3b3d;
+}
+
+/* ползунок скроллбара */
+.contactList::-webkit-scrollbar-thumb {
+  background-color: #b0b1b4;
+  border-radius: 6px;
 }
 
 .contactListUl {
   display: block;
   padding: 4px 4px;
   margin: 0 0;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
 }

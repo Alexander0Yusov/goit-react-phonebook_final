@@ -1,5 +1,8 @@
 .Wrap {
   background-color: #18191b;
+  background-image: url(../images/body_back.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .title {
