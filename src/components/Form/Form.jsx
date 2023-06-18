@@ -1,12 +1,15 @@
+import css from './Form.module.css';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { MdOutlineAddAPhoto } from 'react-icons/md';
-import css from './Form.module.css';
-import PropTypes from 'prop-types';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { postContactDBThunk, putContactDBThunk } from 'redux/contactsDB/thunks';
+import {
+  postContactThunk,
+  patchContactThunk,
+} from 'redux/contactsService/thunks';
 import { contactsSelector, filterSelector } from 'redux/stateSelectors';
+import { FAVORITE } from 'components/ListItem/ListItem';
 
 const Form = ({ toggleModal }) => {
   const { contacts } = useSelector(contactsSelector);
@@ -16,6 +19,7 @@ const Form = ({ toggleModal }) => {
       name: nameIni,
       number: numberIni,
       url: urlIni,
+      isFavorite,
       action: actionModal,
     },
   } = useSelector(filterSelector);
@@ -36,17 +40,19 @@ const Form = ({ toggleModal }) => {
       alert(`${decisionForAdd.name} is already in contacts !`);
       return;
     }
-    dispatch(postContactDBThunk(newItem));
+    dispatch(postContactThunk(newItem));
   };
 
   const editUser = newItem => {
-    dispatch(putContactDBThunk(newItem));
+    dispatch(patchContactThunk(newItem));
   };
 
   const handlerSubmit = e => {
     e.preventDefault();
-    actionModal === 'Add' && addUser({ name, number, url });
-    actionModal === 'Edit' && editUser({ id, name, number, url });
+    actionModal === 'Add' &&
+      addUser({ name, number: `${number}|-|${url}|-|${FAVORITE.NotFavorite}` });
+    actionModal === 'Edit' &&
+      editUser({ id, name, number: `${number}|-|${url}|-|${isFavorite}` });
 
     toggleModal();
   };
@@ -112,6 +118,7 @@ const Form = ({ toggleModal }) => {
           className={css.imageInput}
           onChange={handlerChangeFile}
         />
+        <span className={css.imageWarningSpan}>max 70KB</span>
       </label>
 
       <button className={css.button} type="submit">

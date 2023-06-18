@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getUser, login, logout, signUp } from './operations';
+import { getUser, login, logout, signUp } from './authOperations';
 import { pushToken } from 'redux/axiosHerokuInstance';
 
 export const signUpThunk = createAsyncThunk(
@@ -38,19 +38,15 @@ export const logoutThunk = createAsyncThunk(
 export const getUserThunk = createAsyncThunk(
   'auth/getUser',
   async (_, thunkAPI) => {
+    const token = thunkAPI.getState().authCombine.token;
+    if (!token) {
+      console.log('Токена нет');
+      return thunkAPI.rejectWithValue('No valid token');
+    }
+    pushToken(token);
+    console.log('token ', token);
     try {
-      const token = thunkAPI.getState().authCombine.token;
-      if (!token) {
-        console.log('Токена нет');
-        return;
-      }
-
-      pushToken(token);
-
-      console.log('token ', token);
-
       const res = await getUser();
-      console.log('res ', res);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

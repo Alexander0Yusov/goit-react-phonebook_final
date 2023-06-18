@@ -92,6 +92,15 @@
   display: none;
 }
 
+.imageWarningSpan {
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  width: 80px;
+  font-size: 14px;
+  color: #b0b1b4;
+}
+
 .button {
   width: 214px;
   height: 30px;

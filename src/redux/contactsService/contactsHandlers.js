@@ -5,35 +5,25 @@ export const handlerPending = state => {
 export const handlerRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
+  alert(payload);
 };
 
 export const handlerFulfilledGet = (state, { payload }) => {
   state.isLoading = false;
-  if (payload.message) {
-    state.contacts = [];
-    state.error = payload.message;
-    return;
-  }
   state.contacts = payload.data;
   state.error = null;
 };
 
 export const handlerFulfilledPost = (state, { payload }) => {
   state.isLoading = false;
-  if (payload.message) {
-    alert(payload.message);
-    return;
-  }
+  console.log(payload);
   state.contacts = state.contacts.concat([payload.data]);
   state.error = null;
 };
 
-export const handlerFulfilledPut = (state, { payload }) => {
+export const handlerFulfilledPatch = (state, { payload }) => {
   state.isLoading = false;
-  if (payload.message) {
-    alert(payload.message);
-    return;
-  }
+  console.log(payload);
   state.contacts = state.contacts
     .filter(({ id }) => id !== payload.data.id)
     .concat([payload.data]);
@@ -42,10 +32,6 @@ export const handlerFulfilledPut = (state, { payload }) => {
 
 export const handlerFulfilledDelete = (state, { payload }) => {
   state.isLoading = false;
-  if (payload.message) {
-    alert(payload.message);
-    return;
-  }
   state.contacts = state.contacts.filter(({ id }) => id !== payload.data.id);
   state.error = null;
 };

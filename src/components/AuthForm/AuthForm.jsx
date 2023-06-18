@@ -12,9 +12,9 @@ const AUTH_ACTION = {
 };
 
 const AuthForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('across8888@mail.com');
-  const [password, setPassword] = useState('examplepwd12345');
+  const [name, setName] = useState('DemoUser0');
+  const [email, setEmail] = useState('DemoUser0@mail.com');
+  const [password, setPassword] = useState('DemoUser0');
   const [action, setAction] = useState('');
 
   const { error } = useSelector(authSelector);

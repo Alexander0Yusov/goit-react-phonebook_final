@@ -6,7 +6,6 @@ import { logoutThunk } from 'redux/authService/thunks';
 import { TiHome } from 'react-icons/ti';
 import { FaList } from 'react-icons/fa';
 import { FiLogIn } from 'react-icons/fi';
-
 import { GiExitDoor } from 'react-icons/gi';
 import { HiUserAdd } from 'react-icons/hi';
 import { authSelector } from 'redux/stateSelectors';
@@ -16,13 +15,13 @@ const Navigation = () => {
   const location = useLocation();
   const { user } = useSelector(authSelector);
 
-  useEffect(() => {
-    const home = document.querySelector('[data-navigate="home"]');
-    const contacts = document.querySelector('[data-navigate="contacts"]');
-    const register = document.querySelector('[data-navigate="register"]');
-    const login = document.querySelector('[data-navigate="login"]');
-    const currentPage = location.pathname.split('/')[1];
+  const home = document.querySelector('[data-navigate="home"]');
+  const contacts = document.querySelector('[data-navigate="contacts"]');
+  const register = document.querySelector('[data-navigate="register"]');
+  const login = document.querySelector('[data-navigate="login"]');
+  const currentPage = location.pathname.split('/')[1];
 
+  useEffect(() => {
     const resetColor = () => {
       // eslint-disable-next-line
       [home, contacts, register, login].map(item => {
@@ -32,26 +31,23 @@ const Navigation = () => {
       });
     };
 
+    resetColor();
     switch (currentPage) {
       case '':
-        resetColor();
         home?.classList.add(`${css.isActive}`);
         break;
       case 'contacts':
-        resetColor();
         contacts?.classList.add(`${css.isActive}`);
         break;
       case 'register':
-        resetColor();
         register?.classList.add(`${css.isActive}`);
         break;
       case 'login':
-        resetColor();
         login?.classList.add(`${css.isActive}`);
         break;
       default:
     }
-  }, [location.pathname]);
+  }, [currentPage, home, contacts, register, login]);
 
   return (
     <div className={css.header}>

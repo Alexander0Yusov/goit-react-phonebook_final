@@ -33,6 +33,7 @@ const Filter = ({ onModalOpen }) => {
         onClick={() => onModalOpen()}
         className={css.modalOpen}
         type="button"
+        title="Create contact"
       >
         <TiUserAdd></TiUserAdd>
       </span>

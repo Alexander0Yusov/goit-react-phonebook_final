@@ -1,4 +1,4 @@
-// комбинацию тоже удобно оглашать в отльном файле
+// комбинацию удобно оглашать в отльном файле
 
 // import { combineReducers } from '@reduxjs/toolkit';
 // import { filterReducer } from './filter/filterSlice';

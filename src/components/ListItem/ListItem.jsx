@@ -1,36 +1,75 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './ListItem.module.css';
 import { CiSquareRemove } from 'react-icons/ci';
 import { FaPhone } from 'react-icons/fa';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
-import { useState } from 'react';
 import { setSelectedUser } from 'redux/filter/filterSlice';
 import { useDispatch } from 'react-redux';
+import {
+  deleteContactThunk,
+  patchContactThunk,
+} from 'redux/contactsService/thunks';
 
-const ListItem = ({ id, name, number, url, deleteContact, toggleModal }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+export const FAVORITE = {
+  IsFavorite: 'IsFavorite',
+  NotFavorite: 'NotFavorite',
+};
+
+const ListItem = ({
+  id,
+  name,
+  number,
+  url,
+  isFavorite: isFavoriteIni,
+  toggleModal,
+}) => {
+  const [isFavorite, setIsFavorite] = useState(isFavoriteIni);
   const dispatch = useDispatch();
+
+  const toggleFavorite = () => {
+    if (isFavorite === FAVORITE.IsFavorite) {
+      dispatch(
+        patchContactThunk({
+          id,
+          name,
+          number: `${number}|-|${url}|-|${FAVORITE.NotFavorite}`,
+        })
+      );
+      setIsFavorite(FAVORITE.NotFavorite);
+      return;
+    }
+    dispatch(
+      patchContactThunk({
+        id,
+        name,
+        number: `${number}|-|${url}|-|${FAVORITE.IsFavorite}`,
+      })
+    );
+    setIsFavorite(FAVORITE.IsFavorite);
+  };
 
   const listItemClickHandler = e => {
     const clickTag = e.target.tagName;
     if (clickTag === 'LI' || clickTag === 'P') {
       toggleModal();
-      dispatch(setSelectedUser({ id, name, number, url, action: 'Edit' }));
+      dispatch(
+        setSelectedUser({ id, name, number, url, isFavorite, action: 'Edit' })
+      );
     }
+  };
+
+  const deleteHandler = () => {
+    dispatch(deleteContactThunk(id));
   };
 
   return (
     <li className={css.listItem} onClick={listItemClickHandler}>
-      <div
-        className={css.imageThumb}
-        onClick={() => {
-          setIsFavorite(!isFavorite);
-        }}
-      >
+      <div className={css.imageThumb} onClick={toggleFavorite}>
         {url && (
           <img className={css.photoDemo} src={url} alt="User portrait"></img>
         )}
-        {isFavorite ? (
+        {isFavorite === FAVORITE.IsFavorite ? (
           <MdFavorite className={css.favoriteIcon} />
         ) : (
           <MdFavoriteBorder className={css.favoriteBorderIcon} />
@@ -46,11 +85,7 @@ const ListItem = ({ id, name, number, url, deleteContact, toggleModal }) => {
         <FaPhone className={css.callIcon} />
       </button>
 
-      <button
-        onClick={() => deleteContact(id)}
-        className={css.button}
-        type="button"
-      >
+      <button onClick={deleteHandler} className={css.button} type="button">
         <CiSquareRemove className={css.removeIcon} />
       </button>
     </li>
@@ -64,6 +99,6 @@ ListItem.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   url: PropTypes.string,
-  deleteContact: PropTypes.func.isRequired,
+  isFavorite: PropTypes.string,
   toggleModal: PropTypes.func.isRequired,
 };

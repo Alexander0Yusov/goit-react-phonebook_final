@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import { reducer } from './reducer'; - на случай отдельной комбинации
-import { contactsDBReducer } from './contactsDB/contactsDBSlice';
+import { contactsReducer } from './contactsService/contactsSlice';
 import { filterReducer } from './filter/filterSlice';
 import { authReducer } from './authService/authSlice';
 
@@ -8,7 +8,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const authPersistConfig = {
-  key: 'phonebook_auth_final',
+  key: 'goit-react-phonebook_final',
   storage,
   whitelist: ['token'],
 };
@@ -17,7 +17,7 @@ const authPersistedReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    contactsDBCombine: contactsDBReducer,
+    contactsCombine: contactsReducer,
     filterCombine: filterReducer,
     authCombine: authPersistedReducer,
   },

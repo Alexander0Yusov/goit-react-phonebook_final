@@ -6,7 +6,7 @@ import {
   loginFulfilledHandler,
   logoutFulfilledHandler,
   getUserFulfilledHandler,
-} from './stateHandlers';
+} from './authHandlers';
 
 const initialState = {
   token: '',
