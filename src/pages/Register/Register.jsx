@@ -1,9 +1,9 @@
 import css from './Register.module.css';
-import AuthForm from 'components/AuthForm/AuthForm';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authSelector } from 'redux/stateSelectors';
+import SignUpForm from 'components/SignUpForm/SignUpForm';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Register = () => {
   return (
     <div className={css.register}>
       <h2 className={css.title}>SignUp</h2>
-      <AuthForm />
+      <SignUpForm />
     </div>
   );
 };

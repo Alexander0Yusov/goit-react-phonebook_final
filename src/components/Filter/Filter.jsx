@@ -4,7 +4,7 @@ import { FcSearch } from 'react-icons/fc';
 import { TiUserAdd } from 'react-icons/ti';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/filter/filterSlice';
+import { setFilter, setSelectedUser } from 'redux/filter/filterSlice';
 import { filterSelector } from 'redux/stateSelectors';
 
 const Filter = ({ onModalOpen }) => {
@@ -13,6 +13,11 @@ const Filter = ({ onModalOpen }) => {
 
   const inputHandler = e => {
     dispatch(setFilter(e.target.value));
+  };
+
+  const addContactHandler = () => {
+    dispatch(setSelectedUser({ name: '', number: '', url: '', action: 'Add' }));
+    onModalOpen();
   };
 
   return (
@@ -30,7 +35,7 @@ const Filter = ({ onModalOpen }) => {
         </span>
       </label>
       <span
-        onClick={() => onModalOpen()}
+        onClick={addContactHandler}
         className={css.modalOpen}
         type="button"
         title="Create contact"

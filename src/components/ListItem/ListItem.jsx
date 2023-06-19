@@ -32,7 +32,6 @@ const ListItem = ({
       dispatch(
         patchContactThunk({
           id,
-          name,
           number: `${number}|-|${url}|-|${FAVORITE.NotFavorite}`,
         })
       );
@@ -42,7 +41,6 @@ const ListItem = ({
     dispatch(
       patchContactThunk({
         id,
-        name,
         number: `${number}|-|${url}|-|${FAVORITE.IsFavorite}`,
       })
     );
@@ -52,10 +50,10 @@ const ListItem = ({
   const listItemClickHandler = e => {
     const clickTag = e.target.tagName;
     if (clickTag === 'LI' || clickTag === 'P') {
-      toggleModal();
       dispatch(
         setSelectedUser({ id, name, number, url, isFavorite, action: 'Edit' })
       );
+      toggleModal();
     }
   };
 

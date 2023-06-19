@@ -1,31 +1,34 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSelectedUser } from 'redux/filter/filterSlice';
+import { useSelector } from 'react-redux';
+import { filterSelector } from 'redux/stateSelectors';
 
-import Form from '../../components/Form/Form';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import Modal from '../../components/Modal/Modal';
 import css from './Contacts.module.css';
+import AddContactForm from 'components/AddContactForm/AddContactForm';
+import EditContactForm from 'components/EditContactForm/EditContactForm';
 
 export const Contacts = () => {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
+  const { selectedUser } = useSelector(filterSelector);
 
   const toggleModal = () => {
     setShowModal(prev => !prev);
-    dispatch(setSelectedUser({ name: '', number: '', url: '', action: 'Add' }));
   };
 
   return (
     <div className={css.contacts}>
       <Filter onModalOpen={toggleModal} />
-
       <ContactList toggleModal={toggleModal} />
 
       {showModal && (
         <Modal onClose={toggleModal}>
-          <Form toggleModal={toggleModal}></Form>
+          {selectedUser?.action === 'Edit' ? (
+            <EditContactForm toggleModal={toggleModal} />
+          ) : (
+            <AddContactForm toggleModal={toggleModal} />
+          )}
         </Modal>
       )}
     </div>

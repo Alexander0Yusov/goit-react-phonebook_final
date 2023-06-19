@@ -1,32 +1,16 @@
 import { useEffect, useState } from 'react';
-import css from './AuthForm.module.css';
-import { useLocation } from 'react-router-dom';
+import css from './LoginForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk, signUpThunk } from 'redux/authService/thunks';
+import { loginThunk } from 'redux/authService/thunks';
 import { setError } from 'redux/authService/authSlice';
 import { authSelector } from 'redux/stateSelectors';
 
-const AUTH_ACTION = {
-  SIGNUP: 'SignUp',
-  LOGIN: 'Login',
-};
-
-const AuthForm = () => {
-  const [name, setName] = useState('DemoUser0');
+const LoginForm = () => {
   const [email, setEmail] = useState('DemoUser0@mail.com');
   const [password, setPassword] = useState('DemoUser0');
-  const [action, setAction] = useState('');
 
   const { error } = useSelector(authSelector);
-
-  const location = useLocation();
   const dispatch = useDispatch();
-
-  const { SIGNUP, LOGIN } = AUTH_ACTION;
-
-  useEffect(() => {
-    location.pathname === '/register' ? setAction(SIGNUP) : setAction(LOGIN);
-  }, [location.pathname, SIGNUP, LOGIN]);
 
   useEffect(() => {
     error && alert(error);
@@ -35,43 +19,16 @@ const AuthForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    if (action === SIGNUP) {
-      const user = {
-        name,
+    dispatch(
+      loginThunk({
         email,
         password,
-      };
-      dispatch(signUpThunk(user));
-    }
-
-    if (action === LOGIN) {
-      const user = {
-        email,
-        password,
-      };
-      dispatch(loginThunk(user));
-    }
+      })
+    );
   };
 
   return (
     <form onSubmit={handleSubmit} className={css.authForm} autoComplete="off">
-      {action === SIGNUP && (
-        <label className={css.formLabel}>
-          <input
-            type="text"
-            name="name"
-            title="Enter Your Name, please!"
-            required
-            value={name}
-            onChange={e => {
-              setName(e.target.value);
-            }}
-            className={css.input}
-            placeholder="Name"
-          />
-        </label>
-      )}
       <label className={css.formLabel}>
         <input
           type="text"
@@ -102,10 +59,10 @@ const AuthForm = () => {
       </label>
 
       <button className={css.authButton} type="submit">
-        {action}
+        {'Login'}
       </button>
     </form>
   );
 };
 
-export default AuthForm;
+export default LoginForm;
