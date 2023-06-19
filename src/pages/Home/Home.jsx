@@ -1,5 +1,5 @@
-import UserData from 'components/UserData/UserData';
 import css from './Home.module.scss';
+import UserData from 'components/UserData/UserData';
 import { useSelector } from 'react-redux';
 import { authSelector } from 'redux/stateSelectors';
 

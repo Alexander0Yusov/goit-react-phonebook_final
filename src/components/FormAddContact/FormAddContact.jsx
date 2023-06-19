@@ -1,46 +1,38 @@
-import css from './EditContactForm.module.css';
+import css from './FormAddContact.module.css';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { MdOutlineAddAPhoto } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { patchContactThunk } from 'redux/contactsService/thunks';
-import { contactsSelector, filterSelector } from 'redux/stateSelectors';
+import { postContactThunk } from 'redux/contactsService/thunks';
+import { contactsSelector } from 'redux/stateSelectors';
+import { FAVORITE } from 'components/ListItem/ListItem';
 
-const EditContactForm = ({ toggleModal }) => {
+const FormAddContact = ({ toggleModal }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const [url, setUrl] = useState('');
+
   const { contacts } = useSelector(contactsSelector);
-  const {
-    selectedUser: {
-      id,
-      name: nameIni,
-      number: numberIni,
-      url: urlIni,
-      isFavorite,
-    },
-  } = useSelector(filterSelector);
   const dispatch = useDispatch();
-
-  const [name, setName] = useState(nameIni);
-  const [number, setNumber] = useState(numberIni);
-  const [url, setUrl] = useState(urlIni);
 
   const isIncludingName = (name, array) => {
     const lowName = name.toLowerCase();
     return array.find(({ name }) => name.toLowerCase() === lowName);
   };
 
-  const editUser = newItem => {
+  const addUser = newItem => {
     const decisionForAdd = isIncludingName(newItem.name, contacts);
     if (decisionForAdd) {
       alert(`${decisionForAdd.name} is already in contacts !`);
       return;
     }
-    dispatch(patchContactThunk(newItem));
+    dispatch(postContactThunk(newItem));
   };
 
   const handlerSubmit = e => {
     e.preventDefault();
-    editUser({ id, name, number: `${number}|-|${url}|-|${isFavorite}` });
+    addUser({ name, number: `${number}|-|${url}|-|${FAVORITE.NotFavorite}` });
     toggleModal();
   };
 
@@ -109,14 +101,14 @@ const EditContactForm = ({ toggleModal }) => {
       </label>
 
       <button className={css.button} type="submit">
-        {'Edit'}
+        {'Add'}
       </button>
     </form>
   );
 };
 
-export default EditContactForm;
+export default FormAddContact;
 
-EditContactForm.propTypes = {
+FormAddContact.propTypes = {
   toggleModal: PropTypes.func.isRequired,
 };

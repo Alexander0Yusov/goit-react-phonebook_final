@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
 import css from './Navigation.module.scss';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutThunk } from 'redux/authService/thunks';
 import { TiHome } from 'react-icons/ti';
@@ -13,9 +13,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(authSelector);
 
-  function setLinkStyle({ isActive }) {
-    return isActive ? css.linkActive : css.link;
-  }
+  const setLinkStyle = ({ isActive }) => (isActive ? css.linkActive : css.link);
 
   return (
     <div className={css.header}>

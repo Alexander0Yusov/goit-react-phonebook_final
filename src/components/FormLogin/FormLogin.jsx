@@ -1,13 +1,13 @@
+import css from './FormLogin.module.css';
 import { useEffect, useState } from 'react';
-import css from './LoginForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from 'redux/authService/thunks';
 import { setError } from 'redux/authService/authSlice';
 import { authSelector } from 'redux/stateSelectors';
 
-const LoginForm = () => {
-  const [email, setEmail] = useState('DemoUser0@mail.com');
-  const [password, setPassword] = useState('DemoUser0');
+const FormLogin = () => {
+  const [email, setEmail] = useState(''); // DemoUser0@mail.com
+  const [password, setPassword] = useState(''); // DemoUser0
 
   const { error } = useSelector(authSelector);
   const dispatch = useDispatch();
@@ -65,4 +65,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default FormLogin;

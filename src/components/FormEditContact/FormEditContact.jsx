@@ -1,17 +1,13 @@
-import css from './Form.module.css';
+import css from './FormEditContact.module.css';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { MdOutlineAddAPhoto } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  postContactThunk,
-  patchContactThunk,
-} from 'redux/contactsService/thunks';
+import { patchContactThunk } from 'redux/contactsService/thunks';
 import { contactsSelector, filterSelector } from 'redux/stateSelectors';
-import { FAVORITE } from 'components/ListItem/ListItem';
 
-const Form = ({ toggleModal }) => {
+const FormEditContact = ({ toggleModal }) => {
   const { contacts } = useSelector(contactsSelector);
   const {
     selectedUser: {
@@ -20,7 +16,6 @@ const Form = ({ toggleModal }) => {
       number: numberIni,
       url: urlIni,
       isFavorite,
-      action: actionModal,
     },
   } = useSelector(filterSelector);
   const dispatch = useDispatch();
@@ -34,26 +29,18 @@ const Form = ({ toggleModal }) => {
     return array.find(({ name }) => name.toLowerCase() === lowName);
   };
 
-  const addUser = newItem => {
+  const editUser = newItem => {
     const decisionForAdd = isIncludingName(newItem.name, contacts);
     if (decisionForAdd) {
       alert(`${decisionForAdd.name} is already in contacts !`);
       return;
     }
-    dispatch(postContactThunk(newItem));
-  };
-
-  const editUser = newItem => {
     dispatch(patchContactThunk(newItem));
   };
 
   const handlerSubmit = e => {
     e.preventDefault();
-    actionModal === 'Add' &&
-      addUser({ name, number: `${number}|-|${url}|-|${FAVORITE.NotFavorite}` });
-    actionModal === 'Edit' &&
-      editUser({ id, name, number: `${number}|-|${url}|-|${isFavorite}` });
-
+    editUser({ id, name, number: `${number}|-|${url}|-|${isFavorite}` });
     toggleModal();
   };
 
@@ -122,14 +109,14 @@ const Form = ({ toggleModal }) => {
       </label>
 
       <button className={css.button} type="submit">
-        {actionModal}
+        {'Edit'}
       </button>
     </form>
   );
 };
 
-export default Form;
+export default FormEditContact;
 
-Form.propTypes = {
+FormEditContact.propTypes = {
   toggleModal: PropTypes.func.isRequired,
 };

@@ -1,5 +1,5 @@
-import { authSelector } from 'redux/stateSelectors';
 import css from './UserData.module.scss';
+import { authSelector } from 'redux/stateSelectors';
 import { useSelector } from 'react-redux';
 
 const UserData = () => {

@@ -1,9 +1,9 @@
+import css from './ContactList.module.css';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RotatingLines } from 'react-loader-spinner';
 
-import css from './ContactList.module.css';
 import ListItem from 'components/ListItem/ListItem';
 import { contactsSelector, filterSelector } from 'redux/stateSelectors';
 import { getContactsThunk } from 'redux/contactsService/thunks';

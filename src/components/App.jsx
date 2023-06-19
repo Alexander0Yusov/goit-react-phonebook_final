@@ -1,19 +1,19 @@
 import css from './App.module.css';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, lazy } from 'react';
 import { getUserThunk } from 'redux/authService/thunks';
-
+import RestrictedRoute from './RestrictedRoure';
+import PrivateRoute from './PrivateRoute';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
 import Home from 'pages/Home/Home';
-import { authSelector } from 'redux/stateSelectors';
+
 const Register = lazy(() => import('../pages/Register/Register'));
 const Login = lazy(() => import('../pages/Login/Login'));
 const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(authSelector);
 
   useEffect(() => {
     dispatch(getUserThunk());
@@ -26,19 +26,32 @@ export const App = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
         color: '#010101',
-        // overflow: 'auto',
       }}
     >
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          {isLoggedIn && <Route path="/contacts" element={<Contacts />} />}
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/" component={<Register />} />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
           <Route path="*" element={<h4>Page not found</h4>} />
         </Route>
       </Routes>
@@ -65,9 +78,4 @@ export const App = () => {
 // заюзать Chakra UI або Material UI - по дизайну.
 // сетить стейт и делать с ним запрос в одной функции - зло
 
-// стилизация путей по конспекту
-// убрать дефолтное заполнение форм
-// в фавориты записывать по айди                       || нет. эта метка сидит в строке 'number', но 'name' убрал
-// eslint поубирать, например при ресет каларз
-
-// убрать поле экшен по модалке оно для имени кнопки
+// в фавориты записывать по айди      || нет. эта метка сидит в строке 'number', но 'name' убрал
