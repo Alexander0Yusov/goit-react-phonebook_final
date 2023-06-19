@@ -11,7 +11,7 @@ const Register = () => {
   const { token } = useSelector(authSelector);
 
   useEffect(() => {
-    token && navigate('/');
+    token && navigate('/contacts');
   }, [token, navigate]);
 
   return (

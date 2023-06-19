@@ -40,8 +40,8 @@ export const getUserThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().authCombine.token;
     if (!token) {
-      console.log('Токена нет');
-      return thunkAPI.rejectWithValue('No valid token');
+      return;
+      // return thunkAPI.rejectWithValue('No valid token'); вариант
     }
     pushToken(token);
     console.log('token ', token);
